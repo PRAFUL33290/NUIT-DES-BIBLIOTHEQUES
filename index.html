@@ -394,6 +394,38 @@
             table {
                 min-width: 560px;
             }
+
+            .init-cards-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .spec-cards-row {
+                grid-template-columns: repeat(2, minmax(0, 260px));
+            }
+
+            .cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .formula-card {
+                min-height: auto;
+            }
+
+            .global-total-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .global-total-item-price {
+                margin-left: 0;
+            }
         }
 
         /* ── Initiations Card Grid ── */
@@ -498,60 +530,322 @@
             font-size: 1rem;
         }
 
-        .init-selected-banner {
-            background: linear-gradient(135deg, rgba(185, 13, 1, 0.2), rgba(143, 12, 2, 0.12));
-            border: 2px solid rgba(210, 157, 89, 0.55);
-            border-radius: 14px;
-            padding: 22px 24px;
-            text-align: center;
-        }
-
-        .init-selected-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: var(--accent);
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .init-selected-price {
-            font-size: 3.2rem;
-            font-weight: 800;
-            color: #ffd999;
-            font-family: "Cinzel", serif;
-            line-height: 1;
-            margin-bottom: 8px;
-            transition: opacity 0.15s ease;
-        }
-
-        .init-selected-desc {
-            color: var(--muted);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .init-selected-items {
-            margin-top: 12px;
+        /* ── Bulle flottante total ── */
+        .floating-total {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: #000000;
+            border: 2px solid rgba(210, 157, 89, 0.6);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 0 4px rgba(210, 157, 89, 0.12);
             display: flex;
             flex-direction: column;
-            gap: 6px;
             align-items: center;
+            justify-content: center;
+            gap: 1px;
+            color: #ffffff;
+            z-index: 9999;
+            cursor: default;
+            opacity: 0;
+            transform: scale(0.6) translateY(16px);
+            pointer-events: none;
+            transition: opacity 0.28s cubic-bezier(.4,0,.2,1), transform 0.28s cubic-bezier(.4,0,.2,1);
         }
 
-        .init-sel-item {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(210, 157, 89, 0.3);
-            border-radius: 999px;
-            padding: 5px 16px;
-            font-size: 0.88rem;
+        .floating-total.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
+
+        .floating-total-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(210, 157, 89, 0.9);
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .floating-total-amount {
+            font-family: "Cinzel", serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .floating-total-currency {
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.65);
             font-weight: 700;
-            color: #f3d39b;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 600px) {
+            .floating-total {
+                width: 74px;
+                height: 74px;
+                bottom: 16px;
+                right: 16px;
+            }
+            .floating-total-amount {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ── Spectacle cards : 2 colonnes centrees ── */
+        .spec-cards-row {
+            grid-template-columns: repeat(2, minmax(0, 280px));
+            justify-content: center;
         }
 
         @media (max-width: 600px) {
             .init-cards-row {
                 grid-template-columns: 1fr;
+            }
+            .spec-cards-row {
+                grid-template-columns: 1fr;
+                justify-content: unset;
+            }
+            .section {
+                padding: 20px 14px;
+            }
+            .hero {
+                padding: 28px 14px 22px;
+            }
+            h1 {
+                font-size: 1.35rem;
+            }
+            .formula-price {
+                font-size: 1.2rem;
+            }
+            .init-card {
+                padding: 16px 12px;
+            }
+            .global-total-banner {
+                padding: 18px 16px;
+            }
+        }
+
+        /* ── Total callout hint ── */
+        .total-callout-hint {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(210, 157, 89, 0.10);
+            border: 1px solid rgba(210, 157, 89, 0.45);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f3d39b;
+        }
+
+        .total-callout-hint .hint-icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        /* ── Global Total Banner ── */
+        .global-total-banner {
+            background: linear-gradient(135deg, rgba(185, 13, 1, 0.22), rgba(0, 0, 0, 0.7));
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 24px 28px;
+        }
+
+        .global-total-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--accent);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .global-total-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .global-total-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: rgba(0, 0, 0, 0.32);
+            border: 1px solid rgba(210, 157, 89, 0.28);
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #f3d39b;
+        }
+
+        .global-total-item-price {
+            font-weight: 800;
+            color: #ffd999;
+            white-space: nowrap;
+            margin-left: 16px;
+        }
+
+        .global-total-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(210, 157, 89, 0.45);
+            padding-top: 16px;
+            font-family: "Cinzel", serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffd999;
+        }
+
+        .global-total-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            transition: opacity 0.15s ease;
+        }
+
+        /* ── Site Footer ── */
+        .site-footer {
+            background: #000000;
+            border-top: 2px solid rgba(210, 157, 89, 0.4);
+            padding: 40px 36px 24px;
+        }
+
+        .site-footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid rgba(210, 157, 89, 0.2);
+        }
+
+        .sf-col-title {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .sf-logo {
+            width: 130px;
+            margin-bottom: 12px;
+            display: block;
+            opacity: 0.92;
+        }
+
+        .sf-tagline {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #c4a87a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .sf-sub {
+            font-size: 0.78rem;
+            color: #7a6a5a;
+            font-style: italic;
+            margin-bottom: 14px;
+        }
+
+        .sf-address {
+            font-size: 0.8rem;
+            color: #9a8a78;
+            line-height: 1.7;
+        }
+
+        .sf-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sf-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: #9a8878;
+            line-height: 1.5;
+        }
+
+        .sf-list li::before {
+            content: "•";
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .sf-list li strong {
+            color: #c4a87a;
+        }
+
+        .sf-list a {
+            color: #c4a87a;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .sf-list a:hover {
+            color: #ffd999;
+            text-decoration: underline;
+        }
+
+        .sf-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 18px;
+            font-size: 0.74rem;
+            color: #5a4e42;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sf-bottom a {
+            color: #7a6a5a;
+            text-decoration: none;
+        }
+
+        .sf-bottom a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 860px) {
+            .site-footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 28px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .site-footer {
+                padding: 28px 18px 18px;
+            }
+            .site-footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .sf-bottom {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -695,13 +989,6 @@
                     </div>
                 </div>
 
-                <div class="init-selected-banner" id="initBanner" aria-live="polite">
-                    <div class="init-selected-label">Total s&eacute;lectionn&eacute;</div>
-                    <div class="init-selected-price" id="initBannerPrice">70 <span style="font-size:1.4rem">EUR</span></div>
-                    <div class="init-selected-items" id="initBannerItems">
-                        <div class="init-sel-item">Enfants &middot; 30 min &mdash; 70 EUR</div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -747,6 +1034,13 @@
         </section>
 
         <section class="section">
+            <div class="total-callout-hint" style="margin-bottom:20px">
+                <span class="hint-icon">&#128203;</span>
+                <span>
+                    <strong style="color:#ffd999">Votre total personnalis&eacute; s&rsquo;affiche ci-dessous</strong><br>
+                    Cochez les formules de spectacle et d&rsquo;initiation souhait&eacute;es &mdash; le r&eacute;capitulatif se met &agrave; jour en temps r&eacute;el.
+                </span>
+            </div>
             <div class="global-total-banner" id="globalBanner" aria-live="polite">
                 <div class="global-total-label">R&eacute;capitulatif de votre s&eacute;lection</div>
                 <div class="global-total-items" id="globalItems">
@@ -757,18 +1051,69 @@
                     <span class="global-total-price" id="globalPrice">&mdash; EUR</span>
                 </div>
             </div>
+            <p style="font-size:0.78rem;color:var(--muted);margin-top:10px;text-align:right">Tarifs et disponibilit&eacute;s &agrave; confirmer selon les contraintes techniques du lieu.</p>
         </section>
 
-        <p class="footer-note">Tarifs et disponibilites a confirmer selon les contraintes techniques du lieu.</p>
+        <footer class="site-footer">
+            <div class="site-footer-grid">
+
+                <!-- Colonne 1 : identité -->
+                <div>
+                    <img class="sf-logo" src="https://parvati-india.fr/wp-content/uploads/2023/10/LOGO-PARVATI-INDIA-2.png" alt="Logo Parvati India">
+                    <p class="sf-tagline">Danse Bollywood sur Bordeaux</p>
+                    <p class="sf-sub">Spectacles &amp; Cours de danse</p>
+                    <div class="sf-address">
+                        Rue des pins<br>
+                        33290 Parempuye<br>
+                        France
+                    </div>
+                </div>
+
+                <!-- Colonne 2 : infos légales -->
+                <div>
+                    <span class="sf-col-title">Infos</span>
+                    <ul class="sf-list">
+                        <li><span><strong>SIRET&nbsp;:</strong> 89729873707372</span></li>
+                        <li><span><strong>SIREN&nbsp;:</strong> 897298737</span></li>
+                        <li><span><strong>E-MAIL&nbsp;:</strong> <a href="mailto:contact@parvati-india.fr">contact@parvati-india.fr</a></span></li>
+                        <li><span><strong>T&eacute;l&nbsp;:</strong> <a href="tel:0631321053">06 31 32 10 53</a></span></li>
+                        <li><span>Responsable&nbsp;: Julien Guerrier</span></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 3 : liens -->
+                <div>
+                    <span class="sf-col-title">Liens utiles</span>
+                    <ul class="sf-list">
+                        <li><a href="https://parvati-india.fr/" target="_blank" rel="noopener noreferrer">www.parvati-india.fr</a></li>
+                        <li><a href="https://parvati-india.fr/mentions-legales/" target="_blank" rel="noopener noreferrer">Mentions l&eacute;gales</a></li>
+                        <li><a href="https://parvati-india.fr/politique-de-confidentialite/" target="_blank" rel="noopener noreferrer">Politique de confidentialit&eacute;</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="sf-bottom">
+                <span>&copy; 2026 Parvati India &mdash; Tous droits r&eacute;serv&eacute;s</span>
+                <span>Tarifs &agrave; confirmer selon les contraintes techniques du lieu.</span>
+            </div>
+        </footer>
     </main>
+
+    <!-- Bulle flottante total -->
+    <div class="floating-total" id="floatingTotal" aria-live="polite" aria-label="Total sélectionné">
+        <span class="floating-total-label">Total</span>
+        <span class="floating-total-amount" id="floatingAmount">0</span>
+        <span class="floating-total-currency">EUR</span>
+    </div>
+
 <script>
 (function () {
     var initCards = document.querySelectorAll('.init-card[data-duration]');
     var specCards = document.querySelectorAll('.init-card[data-type="spectacle"]');
-    var bannerPrice = document.getElementById('initBannerPrice');
-    var bannerItems = document.getElementById('initBannerItems');
     var globalPrice = document.getElementById('globalPrice');
     var globalItems = document.getElementById('globalItems');
+    var floatingTotal = document.getElementById('floatingTotal');
+    var floatingAmount = document.getElementById('floatingAmount');
 
     function getInitSelected() {
         return Array.prototype.filter.call(initCards, function (c) {
@@ -780,27 +1125,6 @@
         return Array.prototype.filter.call(specCards, function (c) {
             return c.classList.contains('active');
         });
-    }
-
-    function updateInitBanner() {
-        var selected = getInitSelected();
-        var total = selected.reduce(function (sum, c) {
-            return sum + parseInt(c.dataset.price, 10);
-        }, 0);
-        bannerPrice.style.opacity = '0';
-        setTimeout(function () {
-            if (selected.length === 0) {
-                bannerPrice.innerHTML = '&mdash; <span style="font-size:1.4rem">EUR</span>';
-                bannerItems.innerHTML = '<span style="color:var(--muted);font-style:italic">Aucune initiation sélectionnée</span>';
-            } else {
-                bannerPrice.innerHTML = total + ' <span style="font-size:1.4rem">EUR</span>';
-                bannerItems.innerHTML = selected.map(function (c) {
-                    var dur = c.dataset.duration === '60' ? '1 heure' : '30 min';
-                    return '<div class="init-sel-item">' + c.dataset.audience + ' \u00B7 ' + dur + ' \u2014 ' + c.dataset.price + ' EUR</div>';
-                }).join('');
-            }
-            bannerPrice.style.opacity = '1';
-        }, 140);
     }
 
     function updateGlobalTotal() {
@@ -832,6 +1156,14 @@
             }
             globalPrice.style.opacity = '1';
         }, 140);
+
+        /* Bulle flottante */
+        if (total > 0) {
+            floatingAmount.textContent = total;
+            floatingTotal.classList.add('visible');
+        } else {
+            floatingTotal.classList.remove('visible');
+        }
     }
 
     /* Initiations : radio par groupe de durée + toggle */
@@ -843,7 +1175,6 @@
                 if (c.dataset.duration === duration) c.classList.remove('active');
             });
             if (!wasActive) card.classList.add('active');
-            updateInitBanner();
             updateGlobalTotal();
         });
     });
@@ -858,7 +1189,6 @@
         });
     });
 
-    updateInitBanner();
     updateGlobalTotal();
 })();
 </script>
