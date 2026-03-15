@@ -396,119 +396,118 @@
             }
         }
 
-        /* ── Initiations Configurator ── */
-        .initiation-configurator {
+        /* ── Initiations Card Grid ── */
+        .initiation-grid-wrap {
             display: grid;
-            gap: 24px;
-            background: rgba(18, 18, 18, 0.92);
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 28px 24px;
+            gap: 20px;
         }
 
-        .config-label {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: var(--accent);
-            font-weight: 800;
-            margin-bottom: 12px;
+        .initiation-grid-hint {
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-style: italic;
         }
 
-        .audience-toggle {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .audience-btn {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(210, 157, 89, 0.3);
-            border-radius: 999px;
-            color: #c4beb4;
-            padding: 9px 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            font-family: "Manrope", sans-serif;
-            transition: all 0.2s ease;
-        }
-
-        .audience-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #fff;
-        }
-
-        .audience-btn:hover:not(.active) {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .duration-btn-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-        }
-
-        .duration-btn {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(210, 157, 89, 0.3);
-            border-radius: 14px;
-            color: #c4beb4;
-            padding: 16px 32px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            font-family: "Manrope", sans-serif;
-            transition: all 0.2s ease;
-            text-align: center;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .duration-btn .dur-time {
-            display: block;
-            font-size: 0.85rem;
-            letter-spacing: 0.04em;
-            margin-bottom: 6px;
-        }
-
-        .duration-btn .dur-price {
-            display: block;
+        .init-duration-label {
             font-family: "Cinzel", serif;
-            font-size: 1.55rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffd999;
+            margin-bottom: 14px;
+            padding: 10px 16px;
+            background: rgba(185, 13, 1, 0.18);
+            border-left: 5px solid var(--accent);
+            border-radius: 8px;
+            letter-spacing: 0.03em;
+        }
+
+        .init-cards-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .init-card {
+            background: rgba(18, 18, 18, 0.92);
+            border: 2px solid rgba(210, 157, 89, 0.25);
+            border-radius: 14px;
+            padding: 20px 16px;
+            cursor: pointer;
+            font-family: "Manrope", sans-serif;
+            text-align: center;
+            transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            position: relative;
+            outline: none;
+        }
+
+        .init-card:hover:not(.active) {
+            border-color: var(--accent);
+            background: rgba(30, 20, 10, 0.95);
+            transform: translateY(-2px);
+        }
+
+        .init-card.active {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(185, 13, 1, 0.22), rgba(143, 12, 2, 0.14));
+            box-shadow: 0 8px 24px rgba(185, 13, 1, 0.28);
+            transform: translateY(-2px);
+        }
+
+        .init-card.active::after {
+            content: "✓";
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-size: 0.82rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .init-card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .init-card-audience {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 10px;
+        }
+
+        .init-card.active .init-card-audience {
+            color: #ffd999;
+        }
+
+        .init-card-price {
+            font-family: "Cinzel", serif;
+            font-size: 1.65rem;
             font-weight: 800;
             color: #ffd999;
-            transition: color 0.2s ease;
+            line-height: 1;
         }
 
-        .duration-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #fff;
+        .init-card.active .init-card-price {
+            color: #ffffff;
         }
 
-        .duration-btn.active .dur-price {
-            color: #fff;
+        .init-card-currency {
+            font-size: 1rem;
         }
 
-        .duration-btn:hover:not(.active) {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .config-result {
+        .init-selected-banner {
             background: linear-gradient(135deg, rgba(185, 13, 1, 0.2), rgba(143, 12, 2, 0.12));
             border: 2px solid rgba(210, 157, 89, 0.55);
             border-radius: 14px;
-            padding: 24px;
+            padding: 22px 24px;
             text-align: center;
         }
 
-        .result-label {
-            font-size: 0.78rem;
+        .init-selected-label {
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.09em;
             color: var(--accent);
@@ -516,24 +515,44 @@
             margin-bottom: 6px;
         }
 
-        .result-price {
+        .init-selected-price {
             font-size: 3.2rem;
             font-weight: 800;
             color: #ffd999;
             font-family: "Cinzel", serif;
             line-height: 1;
-            transition: opacity 0.18s ease, transform 0.18s ease;
+            margin-bottom: 8px;
+            transition: opacity 0.15s ease;
         }
 
-        .result-currency {
-            font-size: 1.5rem;
-        }
-
-        .result-desc {
+        .init-selected-desc {
             color: var(--muted);
             font-size: 0.9rem;
             font-weight: 600;
-            margin-top: 10px;
+        }
+
+        .init-selected-items {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .init-sel-item {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(210, 157, 89, 0.3);
+            border-radius: 999px;
+            padding: 5px 16px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #f3d39b;
+        }
+
+        @media (max-width: 600px) {
+            .init-cards-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -612,39 +631,60 @@
 
         <section class="section" id="initiations">
             <h2>Initiations danse Bollywood</h2>
-            <p class="lead">Atelier participatif permettant au public d'apprendre une courte choregraphie Bollywood. Configurez votre atelier ci-dessous.</p>
+            <p class="lead">Atelier participatif permettant au public d'apprendre une courte choregraphie Bollywood. Cliquez sur la formule qui vous convient.</p>
 
-            <div class="initiation-configurator">
+            <div class="initiation-grid-wrap">
+                <p class="initiation-grid-hint">Vous pouvez s&eacute;lectionner <strong>plusieurs prestations</strong> &mdash; le total se met &agrave; jour automatiquement.</p>
 
-                <div class="config-block">
-                    <div class="config-label">Public</div>
-                    <div class="audience-toggle" role="group" aria-label="Type de public">
-                        <button class="audience-btn active" data-audience="Enfants">Enfants</button>
-                        <button class="audience-btn" data-audience="Adultes">Adultes</button>
-                        <button class="audience-btn" data-audience="Enfants + Adultes">Mixte</button>
+                <div>
+                    <div class="init-duration-label">30 minutes</div>
+                    <div class="init-cards-row" role="group" aria-label="Formules 30 minutes">
+                        <button class="init-card active" data-audience="Enfants" data-duration="30" data-price="70">
+                            <span class="init-card-icon">👶</span>
+                            <div class="init-card-audience">Enfants</div>
+                            <div class="init-card-price">70 <span class="init-card-currency">EUR</span></div>
+                        </button>
+                        <button class="init-card" data-audience="Adultes" data-duration="30" data-price="100">
+                            <span class="init-card-icon">🧑</span>
+                            <div class="init-card-audience">Adultes</div>
+                            <div class="init-card-price">100 <span class="init-card-currency">EUR</span></div>
+                        </button>
+                        <button class="init-card" data-audience="Mixte" data-duration="30" data-price="80">
+                            <span class="init-card-icon">👨‍👧</span>
+                            <div class="init-card-audience">Mixte</div>
+                            <div class="init-card-price">100 <span class="init-card-currency">EUR</span></div>
+                        </button>
                     </div>
                 </div>
 
-                <div class="config-block">
-                    <div class="config-label">Duree de l'atelier</div>
-                    <div class="duration-btn-group" role="group" aria-label="Duree de l'atelier">
-                        <button class="duration-btn active" data-duration="30">
-                            <span class="dur-time">30 minutes</span>
-                            <span class="dur-price">70 EUR</span>
+                <div>
+                    <div class="init-duration-label">1 heure</div>
+                    <div class="init-cards-row" role="group" aria-label="Formules 1 heure">
+                        <button class="init-card" data-audience="Enfants" data-duration="60" data-price="100">
+                            <span class="init-card-icon">👶</span>
+                            <div class="init-card-audience">Enfants</div>
+                            <div class="init-card-price">100 <span class="init-card-currency">EUR</span></div>
                         </button>
-                        <button class="duration-btn" data-duration="60">
-                            <span class="dur-time">1 heure</span>
-                            <span class="dur-price">100 EUR</span>
+                        <button class="init-card" data-audience="Adultes" data-duration="60" data-price="120">
+                            <span class="init-card-icon">🧑</span>
+                            <div class="init-card-audience">Adultes</div>
+                            <div class="init-card-price">120 <span class="init-card-currency">EUR</span></div>
+                        </button>
+                        <button class="init-card" data-audience="Mixte" data-duration="60" data-price="120">
+                            <span class="init-card-icon">👨‍👧</span>
+                            <div class="init-card-audience">Mixte</div>
+                            <div class="init-card-price">120 <span class="init-card-currency">EUR</span></div>
                         </button>
                     </div>
                 </div>
 
-                <div class="config-result" aria-live="polite">
-                    <div class="result-label">Tarif</div>
-                    <div class="result-price" id="resultPrice">70 <span class="result-currency">EUR</span></div>
-                    <div class="result-desc" id="resultDesc">Initiation Enfants &middot; 30 minutes</div>
+                <div class="init-selected-banner" id="initBanner" aria-live="polite">
+                    <div class="init-selected-label">Total s&eacute;lectionn&eacute;</div>
+                    <div class="init-selected-price" id="initBannerPrice">70 <span style="font-size:1.4rem">EUR</span></div>
+                    <div class="init-selected-items" id="initBannerItems">
+                        <div class="init-sel-item">Enfants &middot; 30 min &mdash; 70 EUR</div>
+                    </div>
                 </div>
-
             </div>
         </section>
 
@@ -693,48 +733,50 @@
     </main>
 <script>
 (function () {
-    var audienceBtns = document.querySelectorAll('.audience-btn');
-    var durationBtns = document.querySelectorAll('.duration-btn');
-    var resultPrice = document.getElementById('resultPrice');
-    var resultDesc = document.getElementById('resultDesc');
+    var cards = document.querySelectorAll('.init-card');
+    var bannerPrice = document.getElementById('initBannerPrice');
+    var bannerItems = document.getElementById('initBannerItems');
 
-    var audience = 'Enfants';
-    var is1h = false;
-
-    function update() {
-        var price = is1h ? 100 : 70;
-        var durLabel = is1h ? '1 heure' : '30 minutes';
-
-        resultPrice.style.opacity = '0';
-        resultPrice.style.transform = 'scale(0.88)';
-
+    function updateBanner() {
+        var selected = Array.prototype.filter.call(cards, function (c) {
+            return c.classList.contains('active');
+        });
+        var total = selected.reduce(function (sum, c) {
+            return sum + parseInt(c.dataset.price, 10);
+        }, 0);
+        bannerPrice.style.opacity = '0';
         setTimeout(function () {
-            resultPrice.innerHTML = price + ' <span class="result-currency">EUR</span>';
-            resultDesc.textContent = 'Initiation ' + audience + ' \u00B7 ' + durLabel;
-            resultPrice.style.opacity = '1';
-            resultPrice.style.transform = 'scale(1)';
-        }, 150);
+            if (selected.length === 0) {
+                bannerPrice.innerHTML = '&mdash; <span style="font-size:1.4rem">EUR</span>';
+                bannerItems.innerHTML = '<span style="color:var(--muted);font-style:italic">Aucune prestation s\u00e9lectionn\u00e9e</span>';
+            } else {
+                bannerPrice.innerHTML = total + ' <span style="font-size:1.4rem">EUR</span>';
+                bannerItems.innerHTML = selected.map(function (c) {
+                    var dur = c.dataset.duration === '60' ? '1 heure' : '30 min';
+                    return '<div class="init-sel-item">' + c.dataset.audience + ' \u00B7 ' + dur + ' \u2014 ' + c.dataset.price + ' EUR</div>';
+                }).join('');
+            }
+            bannerPrice.style.opacity = '1';
+        }, 140);
     }
 
-    audienceBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            audienceBtns.forEach(function (b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            audience = btn.dataset.audience;
-            update();
+    cards.forEach(function (card) {
+        card.addEventListener('click', function () {
+            var duration = card.dataset.duration;
+            var wasActive = card.classList.contains('active');
+            // Désélectionner toutes les cartes du même groupe de durée
+            cards.forEach(function (c) {
+                if (c.dataset.duration === duration) c.classList.remove('active');
+            });
+            // Si la carte n'était pas déjà active, on la sélectionne
+            if (!wasActive) {
+                card.classList.add('active');
+            }
+            updateBanner();
         });
     });
 
-    durationBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            durationBtns.forEach(function (b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            is1h = btn.dataset.duration === '60';
-            update();
-        });
-    });
-
-    update();
+    updateBanner();
 })();
 </script>
 </body>
