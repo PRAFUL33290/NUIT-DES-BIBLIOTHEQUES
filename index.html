@@ -108,7 +108,7 @@
 
         .formula-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 16px;
             animation: lift 0.6s ease;
         }
@@ -597,9 +597,9 @@
             }
         }
 
-        /* ── Spectacle cards : 2 colonnes centrees ── */
+        /* ── Spectacle cards : 3 colonnes centrees ── */
         .spec-cards-row {
-            grid-template-columns: repeat(2, minmax(0, 280px));
+            grid-template-columns: repeat(3, minmax(0, 260px));
             justify-content: center;
         }
 
@@ -858,11 +858,20 @@
             <div class="event-pill">Nuit des Bibliotheques - Merignac - 3 octobre</div>
             <h1>Proposition d'animation Bollywood</h1>
             <p class="hero-sub">
-                Deux configurations au choix: <strong>16 artistes</strong> ou <strong>20 artistes</strong>.
+                Trois configurations au choix: <strong>6 danseuses (M&eacute;rignac)</strong>, <strong>16 artistes</strong> ou <strong>20 artistes</strong>.
                 Selectionnez la formule qui correspond a votre evenement.
             </p>
 
-            <div class="formula-grid" aria-label="Deux formules principales de spectacle">
+            <div class="formula-grid" aria-label="Trois formules principales de spectacle">
+                <article class="formula-card" style="border-color:rgba(15,180,120,0.5)">
+                    <div class="formula-label" style="color:#4ecb97">Formule locale M&eacute;rignac</div>
+                    <div class="formula-artists">6 danseuses</div>
+                    <div class="formula-detail">Danseuses de M&eacute;rignac</div>
+                    <div class="formula-detail">Duree: 15 minutes</div>
+                    <div class="formula-price" style="color:#4ecb97">400 EUR</div>
+                    <div style="font-size:0.75rem;color:rgba(78,203,151,0.85);font-weight:700;margin-top:4px">&#10003; Transport r&eacute;duit : 15 EUR</div>
+                </article>
+
                 <article class="formula-card">
                     <div class="formula-label">Formule spectacle</div>
                     <div class="formula-artists">16 artistes</div>
@@ -904,6 +913,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr style="background:rgba(15,180,120,0.07)">
+                            <td class="strong" style="color:#4ecb97">Formule locale M&eacute;rignac</td>
+                            <td><span class="strong">6 danseuses de M&eacute;rignac</span><br><span style="font-size:0.8rem;color:rgba(78,203,151,0.85)">Transport r&eacute;duit : 15 EUR (obligatoire)</span></td>
+                            <td>15 min</td>
+                            <td class="strong" style="color:#4ecb97">400 EUR</td>
+                        </tr>
                         <tr>
                             <td class="strong">Formule spectacle</td>
                             <td><span class="strong">15 danseuses + 1 danseur (16 artistes)</span></td>
@@ -923,6 +938,13 @@
             <div style="margin-top: 20px;">
                 <p class="initiation-grid-hint" style="margin-bottom: 12px;">S&eacute;lectionnez votre formule &mdash; un seul choix possible. Cliquer &agrave; nouveau d&eacute;s&eacute;lectionne.</p>
                 <div class="init-cards-row spec-cards-row" role="group" aria-label="S&eacute;lection du spectacle">
+                    <button class="init-card" data-type="spectacle" data-label="6 danseuses M&eacute;rignac" data-detail="Danseuses de M&eacute;rignac" data-price="400" data-merignac="true" style="border-color:rgba(15,180,120,0.4)">
+                        <span class="init-card-icon">💃</span>
+                        <div class="init-card-audience" style="color:#4ecb97">6 danseuses &mdash; M&eacute;rignac</div>
+                        <div style="font-size:0.82rem;color:var(--muted);margin-bottom:6px;font-weight:600;">Danseuses locales</div>
+                        <div class="init-card-price" style="color:#4ecb97">400 <span class="init-card-currency">EUR</span></div>
+                        <div style="font-size:0.72rem;color:rgba(78,203,151,0.85);font-weight:700;margin-top:6px">&#10003; Transport 15 EUR</div>
+                    </button>
                     <button class="init-card" data-type="spectacle" data-label="16 artistes" data-detail="15 danseuses + 1 danseur" data-price="560">
                         <span class="init-card-icon">💃</span>
                         <div class="init-card-audience">16 artistes</div>
@@ -989,6 +1011,40 @@
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+<section class="section" id="transport">
+            <h2>Frais de transport</h2>
+            <p class="lead">Les frais de transport sont <strong style="color:#ffd999">obligatoires</strong> et inclus syst&eacute;matiquement dans toute proposition.</p>
+
+            <div class="option-box" style="margin-top:0;border-left-color:var(--primary)" id="transportBox">
+                <div class="option-title" style="font-size:1rem" id="transportTitle">&#128663;&nbsp; Le Pian-M&eacute;doc &harr; M&eacute;rignac &mdash; 2 voitures, aller/retour</div>
+                <p style="color:#ddd2be;font-size:0.9rem;margin-top:8px" id="transportDesc">
+                    Trajet aller simple estim&eacute;&nbsp;: <strong>15&nbsp;km</strong>. Aller/retour par voiture&nbsp;: 30&nbsp;km. Total 2 voitures&nbsp;: <strong>60&nbsp;km</strong>.
+                </p>
+                <div class="chips" style="margin-top:12px" id="transportChips">
+                    <span class="chip">&#128205; Le Pian-M&eacute;doc</span>
+                    <span class="chip">&harr;</span>
+                    <span class="chip">&#128205; M&eacute;rignac</span>
+                    <span class="chip">&#10005; 2 voitures</span>
+                    <span class="chip">Aller / retour</span>
+                </div>
+                <div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:14px;border-top:1px solid rgba(210,157,89,0.3)">
+                    <div style="font-size:0.84rem;color:var(--muted);line-height:1.7" id="transportCalc">
+                        60&nbsp;km &times; 0,40&nbsp;EUR/km (bar&egrave;me kilom&eacute;trique)
+                    </div>
+                    <div>
+                        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);font-weight:800;text-align:right">Forfait transport</div>
+                        <div style="font-family:'Cinzel',serif;font-size:1.8rem;font-weight:800;color:#ffd999;line-height:1.1" id="transportFeeDisplay">24&nbsp;<span style="font-size:1rem">EUR</span></div>
+                    </div>
+                </div>
+                <p style="font-size:0.8rem;color:rgba(255,160,80,0.85);margin-top:12px;font-weight:700">
+                    &#9888;&#65039;&nbsp;Frais obligatoires &mdash; ajout&eacute;s automatiquement au total
+                </p>
+                <p style="font-size:0.8rem;color:rgba(78,203,151,0.9);margin-top:8px;font-weight:700">
+                    &#10003;&nbsp;Si la formule <strong>6 danseuses de M&eacute;rignac</strong> est s&eacute;lectionn&eacute;e, le transport est r&eacute;duit &agrave; <strong>15,00 EUR</strong> (danseuses locales).
+                </p>
             </div>
         </section>
 
@@ -1108,6 +1164,7 @@
 
 <script>
 (function () {
+    /* Transport : 24 EUR par défaut (Le Pian-Médoc ↔ Mérignac), 15 EUR si danseuses de Mérignac sélectionnées */
     var initCards = document.querySelectorAll('.init-card[data-duration]');
     var specCards = document.querySelectorAll('.init-card[data-type="spectacle"]');
     var globalPrice = document.getElementById('globalPrice');
@@ -1134,7 +1191,9 @@
         var initTotal = selInit.reduce(function (sum, c) {
             return sum + parseInt(c.dataset.price, 10);
         }, 0);
-        var total = specTotal + initTotal;
+        var isMerignac = selSpec.length > 0 && selSpec[0].dataset.merignac === 'true';
+        var transportFee = isMerignac ? 15 : 24;
+        var total = specTotal + initTotal + transportFee;
 
         var html = '';
         if (selSpec.length > 0) {
@@ -1145,24 +1204,51 @@
             html += '<div class="global-total-item"><span>Initiation &middot; ' + c.dataset.audience + ' &middot; ' + dur + '</span><span class="global-total-item-price">' + c.dataset.price + ' EUR</span></div>';
         });
 
+        if (html === '') {
+            html = '<span style="color:var(--muted);font-style:italic">S&eacute;lectionnez une prestation ci-dessus</span>';
+        }
+
+        /* Ligne transport — toujours présente (obligatoire), tarif variable selon formule */
+        var transportLabel = isMerignac
+            ? '&#128663; Transport &middot; M&eacute;rignac (local)&nbsp;<span style="font-size:0.78rem;color:rgba(78,203,151,0.85);font-weight:700">(r&eacute;duit &mdash; danseuses locales)</span>'
+            : '&#128663; Transport &middot; Le Pian-M&eacute;doc &harr; M&eacute;rignac &middot; 2 voitures A/R&nbsp;<span style="font-size:0.78rem;color:rgba(255,160,80,0.8);font-weight:700">(obligatoire)</span>';
+        html += '<div class="global-total-item" style="border-color:' + (isMerignac ? 'rgba(78,203,151,0.55);background:rgba(15,180,120,0.1)' : 'rgba(210,157,89,0.55);background:rgba(185,13,1,0.12)') + '"><span>' + transportLabel + '</span><span class="global-total-item-price">' + transportFee + ' EUR</span></div>';
+
         globalPrice.style.opacity = '0';
         setTimeout(function () {
-            if (html === '') {
-                globalItems.innerHTML = '<span style="color:var(--muted);font-style:italic">Aucune prestation sélectionnée</span>';
-                globalPrice.innerHTML = '&mdash; EUR';
-            } else {
-                globalItems.innerHTML = html;
-                globalPrice.textContent = total + ' EUR';
-            }
+            globalItems.innerHTML = html;
+            globalPrice.textContent = total + ' EUR';
             globalPrice.style.opacity = '1';
         }, 140);
 
-        /* Bulle flottante */
-        if (total > 0) {
-            floatingAmount.textContent = total;
-            floatingTotal.classList.add('visible');
+        /* Bulle flottante — toujours visible (transport inclus) */
+        floatingAmount.textContent = total;
+        floatingTotal.classList.add('visible');
+
+        /* Mise à jour du prix affiché dans la section Frais de transport */
+        var transportDisplay = document.getElementById('transportFeeDisplay');
+        if (transportDisplay) {
+            transportDisplay.innerHTML = transportFee + '&nbsp;<span style="font-size:1rem">EUR</span>';
+        }
+
+        /* Mise à jour du bloc texte transport */
+        var tTitle = document.getElementById('transportTitle');
+        var tDesc  = document.getElementById('transportDesc');
+        var tChips = document.getElementById('transportChips');
+        var tCalc  = document.getElementById('transportCalc');
+        var tBox   = document.getElementById('transportBox');
+        if (isMerignac) {
+            if (tTitle) tTitle.innerHTML = '&#128663;&nbsp; M&eacute;rignac &mdash; danseuses locales';
+            if (tDesc)  tDesc.innerHTML  = 'Les danseuses interviennent depuis <strong>M&eacute;rignac</strong>. D&eacute;placement local, pas de long trajet.';
+            if (tChips) tChips.innerHTML = '<span class="chip">&#128205; M&eacute;rignac</span><span class="chip">Danseuses locales</span><span class="chip">Trajet r&eacute;duit</span>';
+            if (tCalc)  tCalc.innerHTML  = 'D&eacute;placement local &mdash; forfait r&eacute;duit';
+            if (tBox)   tBox.style.borderLeftColor = '#4ecb97';
         } else {
-            floatingTotal.classList.remove('visible');
+            if (tTitle) tTitle.innerHTML = '&#128663;&nbsp; Le Pian-M&eacute;doc &harr; M&eacute;rignac &mdash; 2 voitures, aller/retour';
+            if (tDesc)  tDesc.innerHTML  = 'Trajet aller simple estim&eacute;&nbsp;: <strong>15&nbsp;km</strong>. Aller/retour par voiture&nbsp;: 30&nbsp;km. Total 2 voitures&nbsp;: <strong>60&nbsp;km</strong>.';
+            if (tChips) tChips.innerHTML = '<span class="chip">&#128205; Le Pian-M&eacute;doc</span><span class="chip">&harr;</span><span class="chip">&#128205; M&eacute;rignac</span><span class="chip">&#10005; 2 voitures</span><span class="chip">Aller / retour</span>';
+            if (tCalc)  tCalc.innerHTML  = '60&nbsp;km &times; 0,40&nbsp;EUR/km (bar&egrave;me kilom&eacute;trique)';
+            if (tBox)   tBox.style.borderLeftColor = 'var(--primary)';
         }
     }
 
