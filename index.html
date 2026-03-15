@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bollywood - Nuit des Bibliotheques | Merignac - 3 octobre</title>
+    <title>Bollywood - Nuit des Biblioth&egrave;ques | M&eacute;rignac - 3 octobre</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -737,6 +737,134 @@
             transition: opacity 0.15s ease;
         }
 
+        /* ── Carrousel ── */
+        .carousel-section {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            line-height: 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .carousel-track:active { cursor: grabbing; }
+        .carousel-track::-webkit-scrollbar { display: none; }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            position: relative;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            object-position: center center;
+            display: block;
+            line-height: 0;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 22px 28px 18px;
+            background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+
+        .carousel-caption span {
+            color: var(--accent);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: rgba(0,0,0,0.55);
+            border: 1px solid rgba(210,157,89,0.45);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.18s, border-color 0.18s;
+            color: #fff;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(185,13,1,0.75);
+            border-color: var(--accent);
+        }
+
+        .carousel-btn-prev { left: 14px; }
+        .carousel-btn-next { right: 14px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            border: none;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent);
+            transform: scale(1.35);
+        }
+
+        @media (max-width: 600px) {
+            .carousel-slide img {
+                height: 100svh;
+                max-height: 100svh;
+                object-fit: cover;
+                object-position: center center;
+            }
+            .carousel-btn {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 930px) {
+            .carousel-slide img {
+                height: 420px;
+            }
+        }
+
         /* ── Site Footer ── */
         .site-footer {
             background: #000000;
@@ -954,7 +1082,7 @@
         <header class="hero">
             <img class="hero-logo" src="https://parvati-india.fr/wp-content/uploads/2023/10/LOGO-PARVATI-INDIA-2.png" alt="Logo Parvati India">
             <img class="hero-bollywood" src="https://parvati-india.fr/wp-content/uploads/2026/01/LOGO-BOLLYWOOD.png" alt="Logo Bollywood">
-            <div class="event-pill">Nuit des Bibliotheques - Merignac - 3 octobre</div>
+            <div class="event-pill">Nuit des Biblioth&egrave;ques &mdash; M&eacute;rignac &mdash; 3 octobre</div>
             <h1>Proposition d'animation Bollywood</h1>
             <p class="hero-sub">
                 Trois configurations au choix: <strong>6 danseuses (M&eacute;rignac)</strong>, <strong>16 artistes</strong> ou <strong>20 artistes</strong>.
@@ -966,7 +1094,7 @@
                     <div class="formula-label" style="color:#4ecb97">Formule locale M&eacute;rignac</div>
                     <div class="formula-artists">6 danseuses</div>
                     <div class="formula-detail">Danseuses de M&eacute;rignac</div>
-                    <div class="formula-detail">Duree: 15 minutes</div>
+                    <div class="formula-detail">Dur&eacute;e : 15&ndash;20 minutes</div>
                     <div class="formula-price" style="color:#4ecb97">400 EUR</div>
                     <div class="hero-formula-note" style="font-size:0.75rem;color:rgba(78,203,151,0.85);font-weight:700;margin-top:4px">&#10003; Transport r&eacute;duit : 15 EUR</div>
                 </article>
@@ -975,7 +1103,7 @@
                     <div class="formula-label">Formule spectacle</div>
                     <div class="formula-artists">16 artistes</div>
                     <div class="formula-detail">15 danseuses + 1 danseur</div>
-                    <div class="formula-detail">Duree: 15 minutes</div>
+                    <div class="formula-detail">Dur&eacute;e : 15&ndash;20 minutes</div>
                     <div class="formula-price">560 EUR</div>
                 </article>
 
@@ -983,21 +1111,53 @@
                     <div class="formula-label">Formule grand spectacle</div>
                     <div class="formula-artists">20 artistes</div>
                     <div class="formula-detail">19 danseuses + 1 danseur</div>
-                    <div class="formula-detail">Duree: 15 minutes</div>
+                    <div class="formula-detail">Dur&eacute;e : 15&ndash;20 minutes</div>
                     <div class="formula-price">680 EUR</div>
                 </article>
             </div>
 
             <div class="cta-row">
-                <a class="btn btn-primary" href="mailto:contact@parvati-india.fr?subject=Proposition%20d%27animation%20Bollywood%20-%20Nuit%20des%20Bibliotheques">Demander une proposition</a>
+                <a class="btn btn-primary" href="mailto:contact@parvati-india.fr?subject=Proposition%20d%27animation%20Bollywood%20-%20Nuit%20des%20Biblioth%C3%A8ques">Demander une proposition</a>
                 <a class="btn btn-secondary" href="tel:0631321053">Appeler: 06 31 32 10 53</a>
             </div>
         </header>
 
+        <!-- Carrousel photos — Nuit des Bibliothèques, 5 octobre 2024 -->
+        <div class="carousel-section" aria-label="Photos de l’édition 2024" role="region">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide">
+                    <img src="img/1ed56634-3815-49d9-8b32-d6ad55071dee.JPG" alt="Initiation Bollywood — le public danse avec les artistes" loading="eager">
+                    <div class="carousel-caption">Nuit des Bibliothèques &mdash; <span>5 octobre 2024</span> &mdash; Le public danse avec les artistes</div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/c4e75149-1a5a-4fec-b846-2ff401f2156e.JPG" alt="Enfants qui dansent le Bollywood" loading="lazy">
+                    <div class="carousel-caption">Nuit des Bibliothèques &mdash; <span>5 octobre 2024</span> &mdash; Les enfants sur la piste</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img/de5d9e0e-ebca-40fd-8d85-6434ee4daf6f.JPG" alt="Spectacle danseur Bollywood" loading="lazy" style="object-position: center top;">
+                    <div class="carousel-caption">Nuit des Bibliothèques &mdash; <span>5 octobre 2024</span> &mdash; Solo Bollywood</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img/edc1c459-09dd-4098-bcae-f5b792944e44.JPG" alt="Soirée Nuit des Bibliothèques" loading="lazy">
+                    <div class="carousel-caption">Nuit des Bibliothèques &mdash; <span>5 octobre 2024</span> &mdash; Une soirée conviviale et festive</div>
+                </div>
+            </div>
+
+            <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Photo précédente">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Photo suivante">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+
+            <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Navigation du carrousel"></div>
+        </div>
+
         <section class="section" id="spectacle">
             <h2>Spectacle Bollywood</h2>
             <p class="lead">
-                Le spectacle peut être présenté avec <span class="strong">6 danseuses de M&eacute;rignac</span> pour une option locale et &eacute;conomique, avec <span class="strong">16 artistes</span> ou en version <span class="strong">grand spectacle avec 20 artistes</span> pour un effet encore plus spectaculaire.
+                Le spectacle peut être présenté avec <span class="strong">6 danseuses de M&eacute;rignac</span> pour une option locale et &eacute;conomique, avec <span class="strong">16 artistes</span> ou en version <span class="strong">grand spectacle avec 20 artistes</span> pour un effet encore plus spectaculaire. Chaque repr&eacute;sentation dure entre <strong>15 et 20&nbsp;minutes</strong> et inclut un moment interactif o&ugrave; <strong>le public est invit&eacute; &agrave; danser</strong> avec les artistes.
             </p>
 
             <div class="table-wrap">
@@ -1006,7 +1166,7 @@
                         <tr>
                             <th>Formule</th>
                             <th>Composition</th>
-                            <th>Duree</th>
+                            <th>Dur&eacute;e</th>
                             <th>Tarif</th>
                         </tr>
                     </thead>
@@ -1014,20 +1174,20 @@
                         <tr style="background:rgba(15,180,120,0.07)">
                             <td class="strong" style="color:#4ecb97">Formule locale M&eacute;rignac</td>
                             <td><span class="strong">6 danseuses de M&eacute;rignac</span><br><span style="font-size:0.8rem;color:rgba(78,203,151,0.85)">Transport r&eacute;duit : 15 EUR (obligatoire)</span></td>
-                            <td>15 min</td>
-                            <td class="strong" style="color:#4ecb97">400 EUR</td>
+                            <td>15&ndash;20 min</td>
+                            <td class="strong" style="color:#4ecb97">400 EUR<br><span style="font-size:0.75rem;font-weight:600;color:rgba(78,203,151,0.8)">+ 15 EUR transport = 415 EUR</span></td>
                         </tr>
                         <tr>
                             <td class="strong">Formule spectacle</td>
                             <td><span class="strong">15 danseuses + 1 danseur (16 artistes)</span></td>
-                            <td>15 min</td>
-                            <td class="strong">560 EUR</td>
+                            <td>15&ndash;20 min</td>
+                            <td class="strong">560 EUR<br><span style="font-size:0.75rem;font-weight:600;color:rgba(210,157,89,0.8)">+ 24 EUR transport = 584 EUR</span></td>
                         </tr>
                         <tr>
                             <td class="strong">Formule grand spectacle</td>
                             <td><span class="strong">19 danseuses + 1 danseur (20 artistes)</span></td>
-                            <td>15 min</td>
-                            <td class="strong">680 EUR</td>
+                            <td>15&ndash;20 min</td>
+                            <td class="strong">680 EUR<br><span style="font-size:0.75rem;font-weight:600;color:rgba(210,157,89,0.8)">+ 24 EUR transport = 704 EUR</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1063,7 +1223,7 @@
 
         <section class="section" id="initiations">
             <h2>Initiations danse Bollywood</h2>
-            <p class="lead">Atelier participatif permettant au public d'apprendre une courte choregraphie Bollywood. Cliquez sur la formule qui vous convient.</p>
+            <p class="lead">Atelier participatif o&ugrave; le public apprend une courte chor&eacute;graphie Bollywood &mdash; et danse vraiment avec les artistes ! Cliquez sur la formule qui vous convient.</p>
 
             <div class="initiation-grid-wrap">
                 <p class="initiation-grid-hint">Vous pouvez s&eacute;lectionner <strong>plusieurs prestations</strong> &mdash; le total se met &agrave; jour automatiquement.</p>
@@ -1150,19 +1310,20 @@
         <section class="section">
             <div class="grid-2">
                 <article class="card">
-                    <h2>Presentation</h2>
+                    <h2>Pr&eacute;sentation</h2>
                     <p>
-                        <span class="strong">Parvati India</span> propose des spectacles et initiations de danse Bollywood inspires
-                        du cinema indien, adaptes aux evenements culturels, bibliotheques et festivals.
+                        <span class="strong">Parvati India</span> propose des spectacles et initiations de danse Bollywood inspir&eacute;s
+                        du cin&eacute;ma indien, adapt&eacute;s aux &eacute;v&eacute;nements culturels, biblioth&egrave;ques et festivals.
+                        Chaque prestation invite le public &agrave; <strong>participer et &agrave; danser</strong> avec les artistes.
                     </p>
                 </article>
 
                 <article class="card">
-                    <h2>Contexte evenement</h2>
-                    <p><span class="strong">La Nuit des Bibliotheques</span></p>
-                    <p>Lieu: Merignac</p>
-                    <p>Date: 3 octobre</p>
-                    <p>Horaire: a partir de 18h00 ou 20h00</p>
+                    <h2>Contexte &eacute;v&eacute;nement</h2>
+                    <p><span class="strong">La Nuit des Biblioth&egrave;ques</span></p>
+                    <p>Lieu&nbsp;: M&eacute;rignac</p>
+                    <p>Date&nbsp;: 3 octobre</p>
+                    <p>Horaire&nbsp;: &agrave; partir de 18h00 ou 20h00</p>
                 </article>
             </div>
         </section>
@@ -1170,8 +1331,8 @@
         <section class="section">
             <article class="card">
                 <h2>Informations pratiques</h2>
-                <p>Espace minimum de danse (zone degagee et securisee).</p>
-                <p>Systeme de sonorisation adapte a la salle.</p>
+                <p>Espace minimum de danse (zone d&eacute;gag&eacute;e et s&eacute;curis&eacute;e).</p>
+                <p>Syst&egrave;me de sonorisation adapt&eacute; &agrave; la salle.</p>
                 <p>Espace pour se changer avant la prestation.</p>
             </article>
         </section>
@@ -1211,7 +1372,7 @@
 
         <section class="section" id="validation">
             <h2>Confirmer &amp; envoyer votre s&eacute;lection</h2>
-            <p class="lead">Votre s&eacute;lection est automatiquement grav&eacute;e ici et dans le pied de page &mdash; modifiable &agrave; tout moment.</p>
+            <p class="lead">Votre s&eacute;lection est automatiquement enregistr&eacute;e ici et dans le pied de page &mdash; modifiable &agrave; tout moment.</p>
 
             <div class="validation-layout">
                 <!-- Colonne gauche : récapitulatif -->
@@ -1244,7 +1405,7 @@
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ecb97" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                         <div>
                             <div style="font-family:'Cinzel',serif;font-size:1.3rem;font-weight:800;color:#4ecb97">S&eacute;lection confirm&eacute;e</div>
-                            <div style="font-size:0.82rem;color:#a8e8d0;margin-top:2px">Votre r&eacute;capitulatif a &eacute;t&eacute; grav&eacute; ci-dessous et dans le pied de page</div>
+                            <div style="font-size:0.82rem;color:#a8e8d0;margin-top:2px">Votre r&eacute;capitulatif a &eacute;t&eacute; enregistr&eacute; ci-dessous et dans le pied de page</div>
                         </div>
                     </div>
                     <pre id="confirmedDetails" style="font-size:0.88rem;color:#d4f0e8;line-height:2;white-space:pre-wrap;font-family:inherit;background:rgba(0,0,0,0.3);border-radius:10px;padding:16px;border:1px solid rgba(78,203,151,0.3)"></pre>
@@ -1271,8 +1432,8 @@
                 <div>
                     <span class="sf-col-title">Infos</span>
                     <ul class="sf-list">
-                        <li><span><strong>SIRET&nbsp;:</strong> 89729873707372</span></li>
-                        <li><span><strong>SIREN&nbsp;:</strong> 897298737</span></li>
+                        <li><span><strong>SIRET&nbsp;:</strong> 852 373 570 00013</span></li>
+                        <li><span><strong>SIREN&nbsp;:</strong> 852 373 570</span></li>
                         <li><span><strong>E-MAIL&nbsp;:</strong> <a href="mailto:contact@parvati-india.fr">contact@parvati-india.fr</a></span></li>
                         <li><span><strong>T&eacute;l&nbsp;:</strong> <a href="tel:0631321053">06 31 32 10 53</a></span></li>
                         <li><span>Responsable&nbsp;: Julien Guerrier</span></li>
@@ -1291,7 +1452,7 @@
 
             </div>
             <div id="sfConfirmed" style="display:none" class="sf-engraved">
-                <div class="sf-engraved-title">&#9997;&#65039;&nbsp; S&eacute;lection grav&eacute;e</div>
+                <div class="sf-engraved-title">&#9997;&#65039;&nbsp; S&eacute;lection enregistr&eacute;e</div>
                 <pre id="sfConfirmedContent" class="sf-engraved-content"></pre>
             </div>
 
@@ -1544,6 +1705,68 @@
     })();
 
     updateGlobalTotal();
+})();
+</script>
+
+<script>
+/* ── Carrousel ── */
+(function () {
+    var track    = document.getElementById('carouselTrack');
+    var prev     = document.getElementById('carouselPrev');
+    var next     = document.getElementById('carouselNext');
+    var dotsWrap = document.getElementById('carouselDots');
+    var slides   = track ? track.querySelectorAll('.carousel-slide') : [];
+    var total    = slides.length;
+    var current  = 0;
+    var timer;
+    var scrolling = false;
+
+    if (!track || total === 0) return;
+
+    /* Créer les points */
+    for (var i = 0; i < total; i++) {
+        var dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Photo ' + (i + 1));
+        dot.dataset.index = i;
+        dotsWrap.appendChild(dot);
+    }
+    var dots = dotsWrap.querySelectorAll('.carousel-dot');
+
+    function updateDots(index) {
+        dots.forEach(function (d, j) { d.classList.toggle('active', j === index); });
+    }
+
+    function goTo(index) {
+        current = (index + total) % total;
+        track.scrollTo({ left: current * track.offsetWidth, behavior: 'smooth' });
+        updateDots(current);
+    }
+
+    function startAuto() {
+        clearInterval(timer);
+        timer = setInterval(function () { goTo(current + 1); }, 5000);
+    }
+
+    /* Sync dots quand l'utilisateur glisse librement */
+    track.addEventListener('scroll', function () {
+        var index = Math.round(track.scrollLeft / track.offsetWidth);
+        if (index !== current) {
+            current = index;
+            updateDots(current);
+            startAuto();
+        }
+    }, { passive: true });
+
+    prev.addEventListener('click', function () { goTo(current - 1); startAuto(); });
+    next.addEventListener('click', function () { goTo(current + 1); startAuto(); });
+
+    dots.forEach(function (dot) {
+        dot.addEventListener('click', function () { goTo(parseInt(dot.dataset.index)); startAuto(); });
+    });
+
+    startAuto();
 })();
 </script>
 </body>
