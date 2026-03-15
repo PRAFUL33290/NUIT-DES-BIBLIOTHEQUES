@@ -626,6 +626,23 @@
                 </table>
             </div>
 
+            <div style="margin-top: 20px;">
+                <p class="initiation-grid-hint" style="margin-bottom: 12px;">S&eacute;lectionnez votre formule &mdash; un seul choix possible. Cliquer &agrave; nouveau d&eacute;s&eacute;lectionne.</p>
+                <div class="init-cards-row spec-cards-row" role="group" aria-label="S&eacute;lection du spectacle">
+                    <button class="init-card" data-type="spectacle" data-label="16 artistes" data-detail="15 danseuses + 1 danseur" data-price="560">
+                        <span class="init-card-icon">💃</span>
+                        <div class="init-card-audience">16 artistes</div>
+                        <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;font-weight:600;">15 danseuses + 1 danseur</div>
+                        <div class="init-card-price">560 <span class="init-card-currency">EUR</span></div>
+                    </button>
+                    <button class="init-card" data-type="spectacle" data-label="20 artistes" data-detail="19 danseuses + 1 danseur" data-price="680">
+                        <span class="init-card-icon">💃</span>
+                        <div class="init-card-audience">20 artistes</div>
+                        <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;font-weight:600;">19 danseuses + 1 danseur</div>
+                        <div class="init-card-price">680 <span class="init-card-currency">EUR</span></div>
+                    </button>
+                </div>
+            </div>
 
         </section>
 
@@ -729,18 +746,44 @@
             </div>
         </section>
 
+        <section class="section">
+            <div class="global-total-banner" id="globalBanner" aria-live="polite">
+                <div class="global-total-label">R&eacute;capitulatif de votre s&eacute;lection</div>
+                <div class="global-total-items" id="globalItems">
+                    <span style="color:var(--muted);font-style:italic">Aucune prestation s&eacute;lectionn&eacute;e</span>
+                </div>
+                <div class="global-total-line">
+                    <span>Total</span>
+                    <span class="global-total-price" id="globalPrice">&mdash; EUR</span>
+                </div>
+            </div>
+        </section>
+
         <p class="footer-note">Tarifs et disponibilites a confirmer selon les contraintes techniques du lieu.</p>
     </main>
 <script>
 (function () {
-    var cards = document.querySelectorAll('.init-card');
+    var initCards = document.querySelectorAll('.init-card[data-duration]');
+    var specCards = document.querySelectorAll('.init-card[data-type="spectacle"]');
     var bannerPrice = document.getElementById('initBannerPrice');
     var bannerItems = document.getElementById('initBannerItems');
+    var globalPrice = document.getElementById('globalPrice');
+    var globalItems = document.getElementById('globalItems');
 
-    function updateBanner() {
-        var selected = Array.prototype.filter.call(cards, function (c) {
+    function getInitSelected() {
+        return Array.prototype.filter.call(initCards, function (c) {
             return c.classList.contains('active');
         });
+    }
+
+    function getSpecSelected() {
+        return Array.prototype.filter.call(specCards, function (c) {
+            return c.classList.contains('active');
+        });
+    }
+
+    function updateInitBanner() {
+        var selected = getInitSelected();
         var total = selected.reduce(function (sum, c) {
             return sum + parseInt(c.dataset.price, 10);
         }, 0);
@@ -748,7 +791,7 @@
         setTimeout(function () {
             if (selected.length === 0) {
                 bannerPrice.innerHTML = '&mdash; <span style="font-size:1.4rem">EUR</span>';
-                bannerItems.innerHTML = '<span style="color:var(--muted);font-style:italic">Aucune prestation s\u00e9lectionn\u00e9e</span>';
+                bannerItems.innerHTML = '<span style="color:var(--muted);font-style:italic">Aucune initiation sélectionnée</span>';
             } else {
                 bannerPrice.innerHTML = total + ' <span style="font-size:1.4rem">EUR</span>';
                 bannerItems.innerHTML = selected.map(function (c) {
@@ -760,23 +803,63 @@
         }, 140);
     }
 
-    cards.forEach(function (card) {
+    function updateGlobalTotal() {
+        var selSpec = getSpecSelected();
+        var selInit = getInitSelected();
+        var specTotal = selSpec.length ? parseInt(selSpec[0].dataset.price, 10) : 0;
+        var initTotal = selInit.reduce(function (sum, c) {
+            return sum + parseInt(c.dataset.price, 10);
+        }, 0);
+        var total = specTotal + initTotal;
+
+        var html = '';
+        if (selSpec.length > 0) {
+            html += '<div class="global-total-item"><span>Spectacle &middot; ' + selSpec[0].dataset.label + ' &mdash; ' + selSpec[0].dataset.detail + '</span><span class="global-total-item-price">' + specTotal + ' EUR</span></div>';
+        }
+        selInit.forEach(function (c) {
+            var dur = c.dataset.duration === '60' ? '1 heure' : '30 min';
+            html += '<div class="global-total-item"><span>Initiation &middot; ' + c.dataset.audience + ' &middot; ' + dur + '</span><span class="global-total-item-price">' + c.dataset.price + ' EUR</span></div>';
+        });
+
+        globalPrice.style.opacity = '0';
+        setTimeout(function () {
+            if (html === '') {
+                globalItems.innerHTML = '<span style="color:var(--muted);font-style:italic">Aucune prestation sélectionnée</span>';
+                globalPrice.innerHTML = '&mdash; EUR';
+            } else {
+                globalItems.innerHTML = html;
+                globalPrice.textContent = total + ' EUR';
+            }
+            globalPrice.style.opacity = '1';
+        }, 140);
+    }
+
+    /* Initiations : radio par groupe de durée + toggle */
+    initCards.forEach(function (card) {
         card.addEventListener('click', function () {
             var duration = card.dataset.duration;
             var wasActive = card.classList.contains('active');
-            // Désélectionner toutes les cartes du même groupe de durée
-            cards.forEach(function (c) {
+            initCards.forEach(function (c) {
                 if (c.dataset.duration === duration) c.classList.remove('active');
             });
-            // Si la carte n'était pas déjà active, on la sélectionne
-            if (!wasActive) {
-                card.classList.add('active');
-            }
-            updateBanner();
+            if (!wasActive) card.classList.add('active');
+            updateInitBanner();
+            updateGlobalTotal();
         });
     });
 
-    updateBanner();
+    /* Spectacle : radio + toggle */
+    specCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+            var wasActive = card.classList.contains('active');
+            specCards.forEach(function (c) { c.classList.remove('active'); });
+            if (!wasActive) card.classList.add('active');
+            updateGlobalTotal();
+        });
+    });
+
+    updateInitBanner();
+    updateGlobalTotal();
 })();
 </script>
 </body>
