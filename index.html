@@ -6,6 +6,10 @@
     <title>Bollywood - Nuit des Biblioth&egrave;ques | M&eacute;rignac - 3 octobre</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://parvati-india.fr">
+    <link rel="preload" as="image" href="https://parvati-india.fr/wp-content/uploads/2023/10/Devotional-Background-For-god-worship-Animation-video.00_00_09_20.Still001.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="https://parvati-india.fr/wp-content/uploads/2023/10/LOGO-PARVATI-INDIA-2.png" fetchpriority="high">
+    <link rel="preload" as="image" href="https://parvati-india.fr/wp-content/uploads/2026/01/LOGO-BOLLYWOOD.png" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -32,15 +36,24 @@
         body {
             font-family: "Manrope", sans-serif;
             color: var(--ink);
+            background: linear-gradient(140deg, var(--bg-1), var(--bg-2));
+            min-height: 100vh;
+            line-height: 1.55;
+            padding: 20px;
+        }
+
+        /* Fond fixe via pseudo-element : GPU-composité, zéro repaint au scroll */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
             background:
                 radial-gradient(circle at 10% 15%, rgba(210, 157, 89, 0.18), transparent 40%),
                 radial-gradient(circle at 90% 10%, rgba(185, 13, 1, 0.2), transparent 42%),
                 linear-gradient(135deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)),
-                url("https://parvati-india.fr/wp-content/uploads/2023/10/Devotional-Background-For-god-worship-Animation-video.00_00_09_20.Still001.jpg") center/cover fixed,
-                linear-gradient(140deg, var(--bg-1), var(--bg-2));
-            min-height: 100vh;
-            line-height: 1.55;
-            padding: 20px;
+                url("https://parvati-india.fr/wp-content/uploads/2023/10/Devotional-Background-For-god-worship-Animation-video.00_00_09_20.Still001.jpg") center/cover;
+            background-color: var(--bg-2);
         }
 
         .page {
@@ -199,8 +212,20 @@
         .section {
             padding: 34px 32px;
             border-top: 1px solid var(--line);
-            animation: appear 0.5s ease;
             background: rgba(10, 10, 10, 0.85);
+            /* Les animations sont déclenchées via JS (IntersectionObserver) */
+            opacity: 1;
+        }
+
+        .section.will-animate {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .section.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section h2 {
@@ -642,6 +667,10 @@
                 padding: 0;
                 background: #000000;
             }
+
+            body::before {
+                display: none;
+            }
             .page {
                 border-radius: 0;
                 border: none;
@@ -755,6 +784,7 @@
             cursor: grab;
             user-select: none;
             -webkit-user-select: none;
+            will-change: scroll-position;
         }
         .carousel-track:active { cursor: grabbing; }
         .carousel-track::-webkit-scrollbar { display: none; }
@@ -1131,15 +1161,15 @@
                 </div>
 
                 <div class="carousel-slide">
-                    <img src="img/c4e75149-1a5a-4fec-b846-2ff401f2156e.JPG" alt="Enfants qui dansent le Bollywood" loading="lazy">
+                    <img src="img/c4e75149-1a5a-4fec-b846-2ff401f2156e.JPG" alt="Enfants qui dansent le Bollywood" loading="lazy" decoding="async">
                     <div class="carousel-caption">Nuit des Bibliothèques &mdash; <span>5 octobre 2024</span> &mdash; Les enfants sur la piste</div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="img/de5d9e0e-ebca-40fd-8d85-6434ee4daf6f.JPG" alt="Spectacle danseur Bollywood" loading="lazy" style="object-position: center top;">
+                    <img src="img/de5d9e0e-ebca-40fd-8d85-6434ee4daf6f.JPG" alt="Spectacle danseur Bollywood" loading="lazy" decoding="async" style="object-position: center top;">
                     <div class="carousel-caption">Nuit des Bibliothèques &mdash; <span>5 octobre 2024</span> &mdash; Solo Bollywood</div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="img/edc1c459-09dd-4098-bcae-f5b792944e44.JPG" alt="Soirée Nuit des Bibliothèques" loading="lazy">
+                    <img src="img/edc1c459-09dd-4098-bcae-f5b792944e44.JPG" alt="Soirée Nuit des Bibliothèques" loading="lazy" decoding="async">
                     <div class="carousel-caption">Nuit des Bibliothèques &mdash; <span>5 octobre 2024</span> &mdash; Une soirée conviviale et festive</div>
                 </div>
             </div>
@@ -1587,17 +1617,18 @@
         html += '<div class="global-total-item" style="border-color:' + (isMerignac ? 'rgba(78,203,151,0.55);background:rgba(15,180,120,0.1)' : 'rgba(210,157,89,0.55);background:rgba(185,13,1,0.12)') + '"><span>' + transportLabel + '</span><span class="global-total-item-price">' + transportFee + ' EUR</span></div>';
 
         globalPrice.style.opacity = '0';
-        setTimeout(function () {
+        requestAnimationFrame(function () {
             globalItems.innerHTML = html;
-            globalPrice.textContent = total + ' EUR';
-            globalPrice.style.opacity = '1';
-        }, 140);
-
-        /* Mirror dans la section validation */
-        var vItems = document.getElementById('validationItems');
-        var vTotal = document.getElementById('validationTotal');
-        if (vItems) vItems.innerHTML = html;
-        if (vTotal) vTotal.textContent = total + ' EUR';
+            /* Mirror dans la section validation */
+            var vItems = document.getElementById('validationItems');
+            var vTotal = document.getElementById('validationTotal');
+            if (vItems) vItems.innerHTML = html;
+            if (vTotal) vTotal.textContent = total + ' EUR';
+            requestAnimationFrame(function () {
+                globalPrice.textContent = total + ' EUR';
+                globalPrice.style.opacity = '1';
+            });
+        });
 
         /* Bulle flottante */
         floatingAmount.textContent = total;
@@ -1709,7 +1740,24 @@
 </script>
 
 <script>
-/* ── Carrousel ── */
+/* ── Animations de sections via IntersectionObserver (pas de repaint au chargement) ── */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var sections = document.querySelectorAll('.section');
+    sections.forEach(function (s) { s.classList.add('will-animate'); });
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.06 });
+    sections.forEach(function (s) { observer.observe(s); });
+})();
+</script>
+
+<script>
 (function () {
     var track    = document.getElementById('carouselTrack');
     var prev     = document.getElementById('carouselPrev');
